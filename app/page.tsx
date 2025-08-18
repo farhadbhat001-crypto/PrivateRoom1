@@ -1,111 +1,99 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+// Removed useWhop – current @whop/react version does not export this hook
+import { User, Lock, DollarSign, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+
 export default function Page() {
-	return (
-		<div className="min-h-screen bg-gray-a12 py-12 px-4 sm:px-6 lg:px-8">
-			<div className="max-w-3xl mx-auto">
-				<div className="text-center mb-12">
-					<h1 className="text-8 font-bold text-gray-9 mb-4">
-						Welcome to Your Whop App
-					</h1>
-					<p className="text-4 text-gray-6">
-						Follow these steps to get started with your Whop application
-					</p>
-				</div>
+  // Simple landing without relying on useWhop hook
+  // Gatekeeping is handled on server-protected routes (e.g., dashboard, API)
 
-				<div className="space-y-8">
-					<div className="bg-white p-6 rounded-lg shadow-md">
-						<h2 className="text-5 font-semibold text-gray-9 mb-4 flex items-center">
-							<span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-accent-9 text-white mr-3">
-								1
-							</span>
-							Create your Whop app
-						</h2>
-						<p className="text-gray-6 ml-11">
-							Go to your{" "}
-							<a
-								href="https://whop.com/dashboard"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="text-accent-9 hover:text-accent-10 underline"
-							>
-								Whop Dashboard
-							</a>{" "}
-							and create a new app in the Developer section.
-						</p>
-					</div>
+  return (
+    <div className="min-h-screen bg-gray-a12 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-8 font-bold text-gray-9 mb-4">
+            Welcome to Private Room Manager
+          </h1>
+          <p className="text-4 text-gray-6">
+            Create and manage paid private rooms for your Whop community
+          </p>
+        </div>
 
-					<div className="bg-white p-6 rounded-lg shadow-md">
-						<h2 className="text-5 font-semibold text-gray-9 mb-4 flex items-center">
-							<span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-accent-9 text-white mr-3">
-								2
-							</span>
-							Set up environment variables
-						</h2>
-						<p className="text-gray-6 ml-11 mb-4">
-							Copy the .env file from your dashboard and create a new .env file
-							in your project root. This will contain all the necessary
-							environment variables for your app.
-						</p>
-						{process.env.NODE_ENV === "development" && (
-							<div className="text-gray-6 ml-11">
-								<pre>
-									<code>
-										WHOP_API_KEY={process.env.WHOP_API_KEY?.slice(0, 5)}...
-										<br />
-										NEXT_PUBLIC_WHOP_AGENT_USER_ID=
-										{process.env.NEXT_PUBLIC_WHOP_AGENT_USER_ID}
-										<br />
-										NEXT_PUBLIC_WHOP_APP_ID=
-										{process.env.NEXT_PUBLIC_WHOP_APP_ID}
-										<br />
-										NEXT_PUBLIC_WHOP_COMPANY_ID=
-										{process.env.NEXT_PUBLIC_WHOP_COMPANY_ID}
-									</code>
-								</pre>
-							</div>
-						)}
-					</div>
+        <div className="space-y-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <User className="h-6 w-6" />
+                Welcome!
+              </CardTitle>
+              <CardDescription>
+                You're authenticated and ready to manage your rooms
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <p className="text-gray-6">
+                  Create paid rooms that users can access after payment. Each room gets a unique password for entry.
+                </p>
+                <Button asChild>
+                  <Link href="/dashboard">
+                    <ArrowRight className="h-4 w-4 mr-2" />
+                    Go to Dashboard
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
 
-					<div className="bg-white p-6 rounded-lg shadow-md">
-						<h2 className="text-5 font-semibold text-gray-9 mb-4 flex items-center">
-							<span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-accent-9 text-white mr-3">
-								3
-							</span>
-							Install your app into your whop
-						</h2>
-						<p className="text-gray-6 ml-11">
-							{process.env.NEXT_PUBLIC_WHOP_APP_ID ? (
-								<a
-									href={`https://whop.com/apps/${process.env.NEXT_PUBLIC_WHOP_APP_ID}/install`}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-accent-9 hover:text-accent-10 underline"
-								>
-									Click here to install your app
-								</a>
-							) : (
-								<span className="text-amber-600">
-									Please set your environment variables to see the installation
-									link
-								</span>
-							)}
-						</p>
-					</div>
-				</div>
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <DollarSign className="h-5 w-5 text-green-600" />
+                  Set Your Price
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-6">
+                  Create rooms with custom pricing - $20, $100, $1000, or any amount you choose.
+                </p>
+              </CardContent>
+            </Card>
 
-				<div className="mt-12 text-center text-2 text-gray-5">
-					<p>
-						Need help? Visit the{" "}
-						<a
-							href="https://dev.whop.com"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-accent-9 hover:text-accent-10 underline"
-						>
-							Whop Documentation
-						</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	);
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Lock className="h-5 w-5 text-blue-600" />
+                  Secure Access
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-6">
+                  Users receive unique passwords after payment for secure room access.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center text-2 text-gray-5">
+            <p>
+              Need help? Visit the{" "}
+              <a
+                href="https://dev.whop.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent-9 hover:text-accent-10 underline"
+              >
+                Whop Documentation
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

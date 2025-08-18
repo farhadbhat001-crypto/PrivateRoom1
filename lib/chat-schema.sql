@@ -20,3 +20,5 @@ CREATE TABLE IF NOT EXISTS dm_messages (
 CREATE INDEX IF NOT EXISTS idx_dm_messages_room_id ON dm_messages(room_id);
 CREATE INDEX IF NOT EXISTS idx_dm_messages_pair ON dm_messages(sender_id, receiver_id);
 
+
+

@@ -7,3 +7,5 @@ export function useWhopUser() {
   return { user, isLoading, isAuthenticated: Boolean(user) && !isLoading };
 }
 
+
+

@@ -31,3 +31,5 @@ export default function PurchaseLinkPage() {
   return <div className="p-6">Loading...</div>;
 }
 
+
+
